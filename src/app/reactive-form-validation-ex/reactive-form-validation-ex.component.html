@@ -1,0 +1,140 @@
+<div style="width: 50%; margin: 10px">
+  <form [formGroup]="authForm">
+    <mat-card-header>Форма авторизации</mat-card-header>
+    <mat-card>
+      <mat-form-field>
+        <mat-label>Login</mat-label>
+        <input matInput type="text" formControlName="login" />
+        <button
+          mat-button
+          *ngIf="authForm.get('login').valid"
+          matSuffix
+          mat-icon-button
+          aria-label="Done"
+        >
+          <mat-icon>done</mat-icon>
+        </button>
+        <button
+          mat-button
+          *ngIf="authForm.get('login').value"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="authForm.get('login').reset()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="
+            authForm.get('login').hasError('pattern') &&
+            !authForm.get('login').hasError('maxlength') &&
+            !authForm.get('login').hasError('required')
+          "
+        >
+          Поле может содержать только символы
+          <span
+            [innerText]="
+              authForm.get('login').getError('pattern')?.requiredPattern
+            "
+          ></span>
+        </mat-error>
+        <mat-error
+          *ngIf="
+            authForm.get('login').hasError('maxlength') &&
+            !authForm.get('login').hasError('pattern') &&
+            !authForm.get('login').hasError('required')
+          "
+        >
+          Введите не более
+          <span
+            [innerText]="
+              authForm.get('login').getError('maxlength')?.requiredLength
+            "
+          ></span>
+          символов
+        </mat-error>
+        <mat-error
+          *ngIf="
+            authForm.get('login').hasError('required') &&
+            !authForm.get('login').hasError('pattern') &&
+            !authForm.get('login').hasError('maxlength')
+          "
+        >
+          Поле обязательно для заполнения
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" />
+        <button
+          mat-button
+          *ngIf="authForm.get('password').valid"
+          matSuffix
+          mat-icon-button
+          aria-label="Done"
+        >
+          <mat-icon>done</mat-icon>
+        </button>
+        <button
+          mat-button
+          *ngIf="authForm.get('password').value"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="authForm.get('password').reset()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="
+            authForm.get('password').hasError('pattern') &&
+            !authForm.get('password').hasError('minlength') &&
+            !authForm.get('password').hasError('required')
+          "
+        >
+          Поле может содержать только символы
+          <span
+            [innerText]="
+              authForm.get('password').getError('pattern')?.requiredPattern
+            "
+          ></span>
+        </mat-error>
+        <mat-error
+          *ngIf="
+            authForm.get('password').hasError('minlength') &&
+            !authForm.get('password').hasError('pattern') &&
+            !authForm.get('password').hasError('required')
+          "
+        >
+          Требуется ввести более
+          <span
+            [innerText]="
+              authForm.get('password').getError('minlength')?.requiredLength
+            "
+          ></span>
+          символов
+        </mat-error>
+        <mat-error
+          *ngIf="
+            authForm.get('password').hasError('required') &&
+            !authForm.get('password').hasError('pattern') &&
+            !authForm.get('password').hasError('minlength')
+          "
+        >
+          Поле обязательно для заполнения
+        </mat-error>
+      </mat-form-field>
+    </mat-card>
+  </form>
+</div>
+<br />
+<div style="margin: 10px">
+  <code>{{ authForm.value | json }}</code>
+  <br />
+  <code>{{ authForm.get("login").errors | json }}</code>
+  <br />
+  <code>{{ authForm.get("password").errors | json }}</code>
+</div>

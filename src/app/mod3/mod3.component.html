@@ -1,0 +1,17 @@
+<p>mod3 works!</p>
+
+<textarea
+  type="text"
+  [value]="surname"
+  (input)="input($event.target.value)"
+></textarea>
+
+<div>{{ surname }}</div>
+
+<div innerHtml="{{ surname }}"></div>
+
+<div innerText="{{ surname }}"></div>
+
+<div [innerHTML]="surname"></div>
+
+<div [innerText]="surname"></div>
